@@ -9,9 +9,9 @@ module.exports = async (req, res) => {
     }
 
     const headers = {
-        "User-Agent": "Mozilla/5.0",
-        "Accept": "application/json",
-        "Content-Type": "application/json"
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
     };
 
     try {
@@ -34,12 +34,12 @@ module.exports = async (req, res) => {
             })
         });
 
-        const text = await profileResponse.text();
+        const profileData = await profileResponse.text();
 
         return res.status(200).json({
             userId,
             profileStatus: profileResponse.status,
-            profileBody: text.substring(0, 2000)
+            profileData
         });
 
     } catch (error) {
