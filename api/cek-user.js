@@ -34,7 +34,7 @@ module.exports = async (req, res) => {
             })
         });
 
-        const profileData = await profileResponse.text();
+        const profileData = await profileResponse.json();
 
         return res.status(200).json({
             userId,
