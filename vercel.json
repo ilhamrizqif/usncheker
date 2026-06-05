@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/",
-      "destination": "/index.html"
+      "source": "/cek-user/:username",
+      "destination": "/api/cek-user?username=:username"
     }
   ]
 }
