@@ -160,7 +160,7 @@
             const data = await res.json();
 
             if (data.status === "NOT_FOUND") {
-                showStatus("NOT AVAILABLE", "danger");
+                showStatus("NOT AVAIL", "danger");
             } else if (data.status === "NOT_IN_GROUP") {
                 showStatus(`${data.username} - NOT AVAILABLE`, "danger");
             } else if (data.status === "AMAN") {
