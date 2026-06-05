@@ -1,0 +1,26 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Environment Variables (Sangat Penting!)
+.env
+.env.local
+.env.*.local
+
+# Optional npm cache directory
+.npm
+
+# Output halaman build (kalau nanti kamu kembangkan)
+dist/
+build/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
