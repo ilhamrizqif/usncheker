@@ -1,8 +1,6 @@
 module.exports = async (req, res) => {
-  const username = req.query.username;
-
 const username = req.params.username;
-
+const TARGET_GROUP_ID = 1010436830;
     const headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
         'Accept': 'application/json',
@@ -89,8 +87,4 @@ const username = req.params.username;
         console.error("Error Detail:", error.message);
         return res.status(500).json({ status: "ERROR", message: "Gagal memproses otentikasi komunitas." });
     }
-
-  return res.status(200).json({
-    status: "AMAN"
-  });
 };
