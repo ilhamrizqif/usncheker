@@ -108,6 +108,11 @@ app.get('/cek-user/:username', async (req, res) => {
         return res.status(500).json({ status: "ERROR", message: "Gagal memproses otentikasi komunitas." });
     }
 });
+app.get('/ping', (req, res) => {
+    res.json({
+        ok: true
+    });
+});
 if (process.env.NODE_ENV !== 'production') {
     app.listen(3000, () => {
         console.log('Server running on http://localhost:3000');
