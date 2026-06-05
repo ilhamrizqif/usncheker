@@ -1,16 +1,21 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const serverless = require('serverless-http');
+const path = require('path');
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.static('public'));
 
 const TARGET_GROUP_ID = 1010436830; // ID ISP COMMUNITY
 const PORT = process.env.PORT || 3000;
 
 app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+    res.sendFile(
+        path.join(__dirname, 'index.html')
+    );
 });
 
 app.get('/cek-user/:username', async (req, res) => {
@@ -103,5 +108,9 @@ app.get('/cek-user/:username', async (req, res) => {
         return res.status(500).json({ status: "ERROR", message: "Gagal memproses otentikasi komunitas." });
     }
 });
-
-app.listen(PORT, () => console.log(`Server Hybrid-API aktif di http://localhost:${PORT}`));
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(3000, () => {
+        console.log('Server running on http://localhost:3000');
+    });
+}
+module.exports = serverless(app);

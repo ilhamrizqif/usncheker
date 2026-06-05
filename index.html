@@ -137,7 +137,7 @@
 
 <div class="container">
     <div class="logo-container">
-        <img src="Alt3-LogoOnly.png" alt="ISP Logo" class="logo-img">
+        <img src="/Alt3-LogoOnly.png" alt="ISP Logo" class="logo-img">
     </div>
 
     <h2>Community Checker</h2>
@@ -156,7 +156,7 @@
         showStatus("Loading...", "info");
 
         try {
-            const res = await fetch(`http://localhost:3000/cek-user/${username}`);
+            const res = await fetch(`/cek-user/${encodeURIComponent(username)}`);
             const data = await res.json();
 
             if (data.status === "NOT_FOUND") {
