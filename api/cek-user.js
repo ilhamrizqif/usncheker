@@ -18,28 +18,33 @@ module.exports = async (req, res) => {
         const userUrl =
             `https://users.roproxy.com/v1/users/search?keyword=${encodeURIComponent(username)}&limit=10`;
 
-        console.log("USERNAME:", username);
-        console.log("URL:", userUrl);
+        const userResponse = await fetch(userUrl, { headers });
+        const userData = await userResponse.json();
 
-        const userResponse = await fetch(userUrl, {
-            method: "GET",
-            headers
+        const userId = userData.data[0].id;
+
+        const profilePlatformUrl =
+            "https://apis.roproxy.com/profile-platform-api/v1/profiles/batch/get";
+
+        const profileResponse = await fetch(profilePlatformUrl, {
+            method: "POST",
+            headers,
+            body: JSON.stringify({
+                userIds: [userId]
+            })
         });
 
-        const text = await userResponse.text();
+        const text = await profileResponse.text();
 
         return res.status(200).json({
-            requestUsername: username,
-            responseStatus: userResponse.status,
-            responseBody: text.substring(0, 1000)
+            userId,
+            profileStatus: profileResponse.status,
+            profileBody: text.substring(0, 2000)
         });
 
     } catch (error) {
-        console.error(error);
-
         return res.status(500).json({
-            status: "ERROR",
-            message: error.message,
+            error: error.message,
             stack: error.stack
         });
     }
